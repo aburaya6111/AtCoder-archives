@@ -41,7 +41,9 @@ bool chmin(T &a, const T &b) {
 #define debug_4(x1, x2, x3, x4) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << ", " #x4 << ": " << x4 << endl
 #define debug_5(x1, x2, x3, x4, x5) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << ", " #x4 << ": " << x4 << ", " #x5 << ": " << x5 << endl
 #ifdef _DEBUG
-#define debug(...) CHOOSE((__VA_ARGS__, debug_5, debug_4, debug_3, debug_2, debug_1, ~))(__VA_ARGS__)
+#define debug(...)                                                        \
+    CHOOSE((__VA_ARGS__, debug_5, debug_4, debug_3, debug_2, debug_1, ~)) \
+    (__VA_ARGS__)
 #else
 #define debug(...)
 #endif
@@ -49,9 +51,20 @@ bool chmin(T &a, const T &b) {
 #pragma endregion
 
 void Main() {
-    int N;
-    cout << N << "\n";
-    
+    int A, V, B, W, T;
+    cin >> A >> V >> B >> W >> T;
+
+
+    int sa = abs(B - A);
+
+    int iii = V - W;
+
+    if (T * iii >= sa) {
+        cout << "YES";
+        return;
+    }
+
+    cout << "NO";
 }
 
 #pragma region main
