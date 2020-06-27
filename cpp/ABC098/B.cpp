@@ -30,12 +30,6 @@ bool chmin(T &a, const T &b) {
     }
     return 0;
 }
-template <class T>
-ostream &operator<<(ostream &out, vector<T> const &v) {
-    for (auto &&a : v) out << a << " ";
-    out << endl;
-    return out;
-}
 
 // debug methods
 // usage: debug(x,y);
@@ -58,7 +52,36 @@ ostream &operator<<(ostream &out, vector<T> const &v) {
 
 void Main() {
     int N;
+    string s;
     cin >> N;
+    cin >> s;
+
+    set<char> cSet;
+    REP(i, N) {
+        cSet.insert(s[i]);
+    }
+
+    int result = 0;
+    REP(i, N - 2) {
+        string sf = s;
+        sf.erase(i + 1);
+        string sb = s.substr(i + 1);
+        debug(s, sb, sf);
+        int count = 0;
+        set<char> cSet;
+        REP(j, SIZE(sf)) {
+            if (cSet.count(sf[j])) {
+                continue;
+            }
+            if ((sb.find(sf[j]) != string::npos)) {
+                count++;
+                cSet.insert(sf[j]);
+            }
+        }
+        debug(result, count);
+        chmax(result, count);
+    }
+    cout << result;
 }
 
 #pragma region main

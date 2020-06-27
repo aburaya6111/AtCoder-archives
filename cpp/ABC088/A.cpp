@@ -57,8 +57,17 @@ ostream &operator<<(ostream &out, vector<T> const &v) {
 #pragma endregion
 
 void Main() {
-    int N;
-    cin >> N;
+    int N, A;
+    cin >> N >> A;
+
+    int b = N % 500;
+    debug(b);
+    if (A >= b) {
+        cout << "Yes";
+        return;
+    }
+
+    cout << "No";
 }
 
 #pragma region main

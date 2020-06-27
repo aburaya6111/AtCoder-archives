@@ -59,6 +59,14 @@ ostream &operator<<(ostream &out, vector<T> const &v) {
 void Main() {
     int N;
     cin >> N;
+    int r = 0;
+    REP(i, 1000000000) {
+        r += i;
+        if (r >= N) {
+            cout << i;
+            return;
+        }
+    }
 }
 
 #pragma region main

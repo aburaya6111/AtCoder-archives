@@ -30,12 +30,6 @@ bool chmin(T &a, const T &b) {
     }
     return 0;
 }
-template <class T>
-ostream &operator<<(ostream &out, vector<T> const &v) {
-    for (auto &&a : v) out << a << " ";
-    out << endl;
-    return out;
-}
 
 // debug methods
 // usage: debug(x,y);
@@ -57,8 +51,15 @@ ostream &operator<<(ostream &out, vector<T> const &v) {
 #pragma endregion
 
 void Main() {
-    int N;
-    cin >> N;
+    int A, B;
+    cin >> A >> B;
+
+    int a = -1000000007;
+    chmax(a, A + B);
+    chmax(a, A - B);
+    chmax(a, A * B);
+
+    cout << a;
 }
 
 #pragma region main

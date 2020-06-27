@@ -59,6 +59,32 @@ ostream &operator<<(ostream &out, vector<T> const &v) {
 void Main() {
     int N;
     cin >> N;
+    vi a(N);
+    REP(i, N) {
+        cin >> a[i];
+    }
+    int b = 0;
+    int count = 1;
+    REP(i, N - 1) {
+        if (a[i + 1] > a[i]) {
+            if (b == -1) {
+                count++;
+                b = 0;
+            } else {
+                b = 1;
+            }
+        }
+        if (a[i + 1] < a[i]) {
+            if (b == 1) {
+                count++;
+                b = 0;
+            } else {
+                b = -1;
+            }
+        }
+    }
+
+    cout << count;
 }
 
 #pragma region main
