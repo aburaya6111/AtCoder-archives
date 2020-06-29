@@ -30,11 +30,25 @@ bool chmin(T &a, const T &b) {
     }
     return 0;
 }
-template <class T>
-ostream &operator<<(ostream &out, vector<T> const &v) {
-    for (auto &&a : v) out << a << " ";
-    out << endl;
-    return out;
+template <typename T>
+std::istream &operator>>(std::istream &is, std::vector<T> &vec) {
+    for (T &element : vec) {
+        is >> element;
+    }
+    return is;
+}
+template <class Ch, class Tr, class Container>
+std::basic_ostream<Ch, Tr> &operator<<(std::basic_ostream<Ch, Tr> &os, Container const &x) {
+    bool first = true;
+    for (auto &y : x) {
+        if (first) {
+            first = false;
+        } else {
+            os << " ";
+        }
+        os << y;
+    }
+    return os;
 }
 
 // debug methods
@@ -60,22 +74,22 @@ void Main() {
     int K, N;
     cin >> K >> N;
     vi a(N);
-    REP(i, N) {
-        cin >> a[i];
-    }
+    cin >> a;
+
     int diff = 0;
-    sort(ALL(a));
-    REP(i, N - 1) {
-        chmax(diff, abs(a[i] - a[i + 1]));
+    a.push_back(a[0] + K);
+    REP(i, N) {
+        chmax(diff, a[i + 1] - a[i]);
     }
-    chmax(diff, K - a[N - 1] + a[0]);
     cout << K - diff;
 }
 
 #pragma region main
 signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    cout << std::fixed;
+    cout.precision(20);
     Main();
     cout << flush;
 }
