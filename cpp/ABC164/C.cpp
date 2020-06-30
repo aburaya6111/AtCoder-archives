@@ -117,6 +117,14 @@ inline std::basic_ostream<Ch, Tr> &operator<<(std::basic_ostream<Ch, Tr> &os, Co
 void Main() {
     int N;
     cin >> N;
+    set<string> s;
+    string buff;
+    REP(i, N) {
+        cin >> buff;
+        s.insert(buff);
+    }
+
+    cout << s.size();
 }
 
 #pragma region main
