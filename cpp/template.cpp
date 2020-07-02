@@ -1,3 +1,5 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx2")
 #pragma region Macros
 /***
  * @author uesugi
@@ -12,7 +14,13 @@ using ll = long long;
 using vi = vector<int>;
 using vvi = vector<vi>;
 
-#define REP(i, n) for (int i = 0, i##_len = (n); i < i##_len; ++i)
+#define _OVERLOAD3(_1, _2, _3, name, ...) name
+#define _REP(i, n) REPI(i, 0, n)
+#define REPI(i, a, b) for (int i = int(a), i##_len = (b); i < i##_len; ++i)
+#define REP(...)                          \
+    _OVERLOAD3(__VA_ARGS__, REPI, _REP, ) \
+    (__VA_ARGS__)
+
 #define ALL(x) (x).begin(), (x).end()
 #define SIZE(x) ((ll)(x).size())
 #define MAX(x) *max_element(ALL(x))
@@ -64,6 +72,12 @@ inline std::istream &operator>>(std::istream &is, std::vector<T> &vec) {
     return is;
 }
 
+template <typename T1, typename T2>
+inline std::istream &operator>>(std::istream &is, std::pair<T1, T2> &p) {
+    is >> p.first >> p.second;
+    return is;
+}
+
 /**
  * overload
  * コンテナの要素を出力する
@@ -89,11 +103,11 @@ inline std::basic_ostream<Ch, Tr> &operator<<(std::basic_ostream<Ch, Tr> &os, Co
 // usage: debug(x,y);
 #define CHOOSE(a) CHOOSE2 a
 #define CHOOSE2(a0, a1, a2, a3, a4, x, ...) x
-#define debug_1(x1) cout << #x1 << ": " << x1 << endl
-#define debug_2(x1, x2) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << endl
-#define debug_3(x1, x2, x3) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << endl
-#define debug_4(x1, x2, x3, x4) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << ", " #x4 << ": " << x4 << endl
-#define debug_5(x1, x2, x3, x4, x5) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << ", " #x4 << ": " << x4 << ", " #x5 << ": " << x5 << endl
+#define DEBUG_1(x1) cout << #x1 << ": " << x1 << "\n"
+#define DEBUG_2(x1, x2) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << "\n"
+#define DEBUG_3(x1, x2, x3) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << "\n"
+#define DEBUG_4(x1, x2, x3, x4) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << ", " #x4 << ": " << x4 << "\n"
+#define DEBUG_5(x1, x2, x3, x4, x5) cout << #x1 << ": " << x1 << ", " #x2 << ": " << x2 << ", " #x3 << ": " << x3 << ", " #x4 << ": " << x4 << ", " #x5 << ": " << x5 << "\n"
 #ifdef _DEBUG
 /**
  * デバッグ用出力メソッド
@@ -101,11 +115,15 @@ inline std::basic_ostream<Ch, Tr> &operator<<(std::basic_ostream<Ch, Tr> &os, Co
  * -D_DEBUG オプション付きビルド時のみ有効
  * @param 可変長引数
  */
-#define debug(...)                                                        \
-    CHOOSE((__VA_ARGS__, debug_5, debug_4, debug_3, debug_2, debug_1, ~)) \
+#define DEBUG(...)                                                        \
+    CHOOSE((__VA_ARGS__, DEBUG_5, DEBUG_4, DEBUG_3, DEBUG_2, DEBUG_1, ~)) \
     (__VA_ARGS__)
+
+#define DEBUG_TIME() cout << "debug_time: " << clock() - START_TIME << "\n"
+clock_t START_TIME = clock();
 #else
-#define debug(...)
+#define DEBUG(...)
+#define DEBUG_TIME()
 #endif
 
 #pragma endregion
