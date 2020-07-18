@@ -133,44 +133,14 @@ clock_t START_TIME = clock();
  * @return void
  */
 void Main() {
-    int N, M;
-    cin >> N >> M;
-    vector<pair<int, int>> sc(M, pair<int, int>());
+    int A, B, C;
+    cin >> A >> B >> C;
 
-    cin >> sc;
-
-    vi mm(N, -1);
-
-    REP(i, M) {
-        if (mm[sc[i].first - 1] != -1 && mm[sc[i].first - 1] != sc[i].second) {
-            cout << -1;
-            return;
-        }
-        mm[sc[i].first - 1] = sc[i].second;
-    }
-
-    if (N != 1 && mm[0] == 0) {
-        cout << -1;
+    if ((A == B && A != C) || (B == C && B != A) || (C == A && B != C)) {
+        cout << "Yes";
         return;
     }
-
-    if (N != 1 && mm[0] == -1) {
-        mm[0] = 1;
-    }
-
-    int aaa = 1;
-    int ans = 0;
-    REP(i, N) {
-        int buff = mm[N - 1 - i];
-        if (buff == -1) {
-            aaa *= 10;
-            continue;
-        }
-        ans += buff * aaa;
-        aaa *= 10;
-    }
-
-    cout << ans;
+    cout << "No";
 }
 
 #pragma region main
